@@ -18,22 +18,18 @@ import java.util.*
 import kotlin.concurrent.thread
 
 /**
- * @author Zhang Xingkun
- *
  * @note 蓝牙接收其实存在一个问题，那就是发送端可能只是发送了一次消息，但是接收端
  * 却分为两次接收，这样如果需要给发送端加上一个日期标签，那么App接收的消息就会很混乱
  * 比如PC发送1234\r\n，APP可能收到1    234，如果加上前缀，就变成了
  * 收到的消息1收到的消息234\r\n
  * 这个问题还有待解决，不过简单的蓝牙传输已经可以了
- *
- * @ps 如果直接复制代码，注意修改package为自己的包名，包名通常都是自己拥有的域名倒写，
- * 比如我有一个网站www.flywinter.com
- *
  */
 class BlueDeviceActivity : AppCompatActivity() {
 
     //初始化变量
     companion object {
+        // SERVICE_UUID "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+        // CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
         var myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
         var mBluetoothSocket: BluetoothSocket? = null
         lateinit var mBluetoothAdapter: BluetoothAdapter
@@ -41,10 +37,10 @@ class BlueDeviceActivity : AppCompatActivity() {
         const val MESSAGE_RECEIVE_TAG = 111
         lateinit var blueAddress: String
         lateinit var blueName: String
-        private val BUNDLE_RECEIVE_DATA = "ReceiveData"
-        private val TAG = "BlueDeviceActivity"
+        private const val BUNDLE_RECEIVE_DATA = "ReceiveData"
+        private const val TAG = "BlueDeviceActivity"
         //设置发送和接收的字符编码格式
-        private val ENCODING_FORMAT = "GBK"
+        private const val ENCODING_FORMAT = "GBK"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

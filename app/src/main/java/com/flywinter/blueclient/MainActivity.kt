@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
- * @author Zhang Xingkun
- *
  * @note 这个Activity的主要作用就是获取已经连接的蓝牙设备目录，然后通过点击
  * 设备，获取mac地址，建立连接，同时如果没有打开蓝牙，提示打开蓝牙
  *
@@ -28,12 +26,8 @@ import kotlinx.android.synthetic.main.activity_main.*
  * 那么关闭App时，相应的蓝牙设备也会关闭，并且不会保存在系统的蓝牙设备列表里面，
  * 某些情况下，可能还会导致连接问题，
  * 比如如果App内连接Wifi，一定概率导致socket客户端建立失败
- * 初学者碰到这种问题往往可能会很迷惑，毕竟这是版本更新的问题
  * 所以如果建立连接的相关代码正确，可是却一直无法建立连接，倒不妨考虑一下是不是权限的问题，
  * 毕竟这些有可能时默认禁止的，即使在xml中添加了权限也不一定有用
- *
- * @ps 如果直接复制代码，注意修改package为自己的包名，包名通常都是自己拥有的域名倒写，
- * 比如我有一个网站www.flywinter.com
  */
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val BLUE_ADDRESS: String = "DeviceAddress"
         const val BLUE_NAME: String = "DeviceName"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             viewHolder.itemView.setOnClickListener {
                 val position = viewHolder.adapterPosition
                 val device = deviceList[position]
-                val intent = Intent(context, BlueDeviceActivity::class.java)
+                val intent = Intent(context, BlueDeviceActivity::class.java) //对象获取
                 intent.putExtra(BLUE_ADDRESS, device.device.address)
                 intent.putExtra(BLUE_NAME,device.deviceName)
                 context.startActivity(intent)
