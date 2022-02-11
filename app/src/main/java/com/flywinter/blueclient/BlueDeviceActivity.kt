@@ -82,7 +82,7 @@ class BlueDeviceActivity : AppCompatActivity() {
             }
             if (check_blue_add_renew.isChecked) {
                 if (isBlueConnected) {
-                    stringBuffer.append("发送的消息:" + toString)
+                    stringBuffer.append("发送的消息:$toString\n")
                     txt_blue_receive.text = stringBuffer.toString()
                 } else {
                     stringBuffer.append("发送失败，蓝牙连接已经断开")
@@ -96,8 +96,6 @@ class BlueDeviceActivity : AppCompatActivity() {
             stringBuffer.delete(0, stringBuffer.length)
             txt_blue_receive.text = stringBuffer.toString()
         }
-
-
     }
 
     //开始连接蓝牙
@@ -131,13 +129,13 @@ class BlueDeviceActivity : AppCompatActivity() {
                 try {
                     if (mBluetoothSocket != null) {
                         if (mBluetoothSocket!!.isConnected) {
-                            Log.e("eee", "现在可以接收数据了")
+                            Log.e("eee", "test: 现在可以接收数据了")
                             receiveMessage()
                         }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Log.e(TAG, "funBlueClientStartReceive:" + e.toString())
+                    Log.e(TAG, "test: funBlueClientStartReceive:" + e.toString())
                 }
             }
         }
@@ -156,7 +154,7 @@ class BlueDeviceActivity : AppCompatActivity() {
             try {
                 bytes = mmInStream.read(mmBuffer)
             } catch (e: IOException) {
-                Log.d(TAG, "Input stream was disconnected", e)
+                Log.d(TAG, "test: Input stream was disconnected", e)
                 break
             }
             val message = Message()
@@ -167,7 +165,7 @@ class BlueDeviceActivity : AppCompatActivity() {
             message.what = MESSAGE_RECEIVE_TAG
             message.data = bundle
             handler.sendMessage(message)
-            Log.e("receive", string)
+            Log.e("test: receive from InputStream", string)
         }
         //  }
     }
@@ -179,7 +177,7 @@ class BlueDeviceActivity : AppCompatActivity() {
                 mBluetoothSocket!!.outputStream.write(input.toByteArray(Charset.forName(ENCODING_FORMAT)))
             } catch (e: IOException) {
                 e.printStackTrace()
-                Log.e(TAG, "sendCommand: 发送消息失败", e)
+                Log.e(TAG, "test: sendCommand: 发送消息失败", e)
             }
         }
     }
@@ -206,7 +204,7 @@ class BlueDeviceActivity : AppCompatActivity() {
                 isBlueConnected = false
             } catch (e: IOException) {
                 e.printStackTrace()
-                Log.e(TAG, "disconnect: 蓝牙关闭失败", e)
+                Log.e(TAG, "test: disconnect: 蓝牙关闭失败", e)
             }
         }
     }

@@ -82,7 +82,23 @@ class MainActivity : AppCompatActivity() {
         recycler_blue_device_list.adapter = adapter
     }
 
+    private fun unpairedDeviceList(){
+        // 如果正在搜索则先取消搜索
+        if(myBluetoothAdapter!!.isDiscovering()) {
+            myBluetoothAdapter!!.cancelDiscovery()
+        }
+        // 开始搜索
+        myBluetoothAdapter!!.startDiscovery()
 
+
+        //var myUnpairedDevices = myBluetoothAdapter!!.getRemoteDevice()
+
+
+
+
+
+        myBluetoothAdapter!!.cancelDiscovery()
+    }
 
 
 
